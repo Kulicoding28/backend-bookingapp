@@ -1,14 +1,13 @@
 import express from "express";
+import { login, register } from "../controllers/auth.js";
 
 const router = express.Router();
 
 // memanggil endpoint api
-router.get("/", (req, res) => {
-  res.send("hello, this is auth endpoint");
-});
-router.get("/register", (req, res) => {
-  res.send("hello, this is register endpoint");
-});
+
+// buat fungsi register di model auth import kesini
+router.post("/register", register);
+router.post("/login", login);
 
 export default router;
 

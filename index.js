@@ -34,6 +34,17 @@ app.use("/api/users", usersRoute);
 app.use("/api/fields", fieldsRoute);
 app.use("/api/rooms", roomsRoute);
 
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Somthing went wrong";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
+
 // 0.tahapan tambahkan di packed.json "type" : "module"
 app.listen(8800, () => {
   connect();
