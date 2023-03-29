@@ -6,19 +6,20 @@ import {
   getField,
   updateField,
 } from "../controllers/field.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 const router = express.Router();
 
 // CREATE
-router.post("/", createField);
+router.post("/", verifyAdmin, createField);
 
 // setelah membuat post cek di insomnia atau postman
 
 // UPDATE
-router.put("/:id", updateField);
+router.put("/:id", verifyAdmin, updateField);
 
 // DELETE
-router.delete("/:id", deleteField);
+router.delete("/:id", verifyAdmin, deleteField);
 
 // GET
 router.get("/:id", getField);

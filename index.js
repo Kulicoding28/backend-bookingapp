@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import fieldsRoute from "./routes/fields.js";
 import roomsRoute from "./routes/rooms.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 // 1.yarn add dotenv
@@ -26,6 +27,8 @@ mongoose.connection.on("disconected", () => {
 });
 
 // 6.middleware
+// kirim cookie parser ke auth controller status
+app.use(cookieParser());
 
 app.use(express.json());
 
