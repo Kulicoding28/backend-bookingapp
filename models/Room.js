@@ -18,7 +18,7 @@ const RoomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    hourNumbers: [
+    roomNumbers: [
       {
         number: Number,
         unavailableDates: { type: [Date] },
@@ -28,3 +28,5 @@ const RoomSchema = new mongoose.Schema(
   { timestamps: true }
 );
 export default mongoose.model("Room", RoomSchema);
+
+// next dari sini buat controllersnya

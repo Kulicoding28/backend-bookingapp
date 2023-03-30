@@ -2,9 +2,10 @@ import express from "express";
 import {
   createField,
   deleteField,
-  getAllFields,
+  getFields,
   getField,
   updateField,
+  countByCity,
 } from "../controllers/field.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
@@ -22,15 +23,17 @@ router.put("/:id", verifyAdmin, updateField);
 router.delete("/:id", verifyAdmin, deleteField);
 
 // GET
-router.get("/:id", getField);
+router.get("/find/:id", getField);
 
 // GET ALL
 // buat error handling pakai middleware index next
-router.get("/", getAllFields);
+router.get("/", getFields);
 // const failed = true;
 
 // // buat folder utils folder dan function error dan tangkap di next ()
 // if (failed) return next(createError(401, "You are not auth!"));
+router.get("/countByCity", countByCity);
+router.get("/countByType", getFields);
 
 export default router;
 
