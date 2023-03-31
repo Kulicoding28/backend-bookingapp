@@ -6,6 +6,7 @@ import usersRoute from "./routes/users.js";
 import fieldsRoute from "./routes/fields.js";
 import roomsRoute from "./routes/rooms.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 const app = express();
 // 1.yarn add dotenv
@@ -28,8 +29,8 @@ mongoose.connection.on("disconected", () => {
 
 // 6.middleware
 // kirim cookie parser ke auth controller status
+app.use(cors());
 app.use(cookieParser());
-
 app.use(express.json());
 
 app.use("/api/auth", authRoute);
@@ -55,3 +56,5 @@ app.listen(8800, () => {
 });
 
 // 4. buat routes
+
+// dari fe untuk proxy pakai middleware i cors jika ingin tidak pakai react proxy

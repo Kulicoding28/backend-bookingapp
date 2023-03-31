@@ -6,6 +6,7 @@ import {
   getField,
   updateField,
   countByCity,
+  countByType,
 } from "../controllers/field.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
 
@@ -33,7 +34,7 @@ router.get("/", getFields);
 // // buat folder utils folder dan function error dan tangkap di next ()
 // if (failed) return next(createError(401, "You are not auth!"));
 router.get("/countByCity", countByCity);
-router.get("/countByType", getFields);
+router.get("/countByType", countByType);
 
 export default router;
 

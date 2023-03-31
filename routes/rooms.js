@@ -2,8 +2,8 @@ import express from "express";
 import {
   createRoom,
   deleteRoom,
-  getAllRooms,
   getRoom,
+  getRooms,
   updateRoom,
 } from "../controllers/room.js";
 import { verifyAdmin } from "../utils/verifyToken.js";
@@ -23,6 +23,6 @@ router.delete("/:id/:fieldId", verifyAdmin, deleteRoom);
 router.get("/:id", getRoom);
 
 // GET ALL
-router.get("/", getAllRooms);
+router.get("/", getRooms);
 
 export default router;

@@ -66,3 +66,19 @@ export const countByCity = async (req, res, next) => {
     next(err);
   }
 };
+
+export const countByType = async (req, res, next) => {
+  try {
+    const fieldCount = await Field.countDocuments({ type: "field" });
+    const sevenCount = await Field.countDocuments({ type: "sevenSoccer" });
+    const futsalCount = await Field.countDocuments({ type: "futsal" });
+
+    res.status(200).json([
+      { type: "field", count: fieldCount },
+      { type: "sevenSoccer", count: sevenCount },
+      { type: "futsal", count: futsalCount },
+    ]);
+  } catch (err) {
+    next(err);
+  }
+};
