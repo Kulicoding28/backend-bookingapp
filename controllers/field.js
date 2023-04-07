@@ -1,4 +1,5 @@
 import Field from "../models/Field.js";
+import Room from "../models/Room.js";
 
 export const createField = async (req, res, next) => {
   const newField = new Field(req.body);
@@ -45,8 +46,14 @@ export const getField = async (req, res, next) => {
 };
 
 export const getFields = async (req, res, next) => {
+  // tambahkan req.query dan cek if featured true api
+  // tambahkan query limit untuk featured true
+  const { min, max, limit, ...others } = req.query;
   try {
-    const fields = await Field.find();
+    const fields = await Field.find({
+      ...others,
+      cheapestPrice: { $gt: min | 1, $lt: max || 999 },
+    }).limit(+limit);
     res.status(200).json(fields);
   } catch (err) {
     next(err);
@@ -78,6 +85,20 @@ export const countByType = async (req, res, next) => {
       { type: "sevenSoccer", count: sevenCount },
       { type: "futsal", count: futsalCount },
     ]);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getFieldRooms = async (req, res, next) => {
+  try {
+    const field = await Field.findById(req.params.id);
+    const list = await Promise.all(
+      field.rooms.map((room) => {
+        return Room.findById(room);
+      })
+    );
+    res.status(200).json(list);
   } catch (err) {
     next(err);
   }
